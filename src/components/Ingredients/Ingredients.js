@@ -6,6 +6,8 @@ import Search from "./Search";
 import ErrorModal from "../UI/ErrorModal";
 import useHttp from "../../hooks/http";
 
+const FIREBASE_URL = `${process.env.REACT_APP_FIREBASE_URL}`;
+
 const ingredientReducer = (currentIngredients, action) => {
   switch (action.type) {
     case "SET":
@@ -54,7 +56,7 @@ const Ingredients = () => {
   const addIngredientHandler = useCallback(
     (ingredient) => {
       sendRequest(
-        "https://react-hooks-6cbaf.firebaseio.com/ingredients.json",
+        `${FIREBASE_URL}/ingredients.json`,
         "POST",
         JSON.stringify(ingredient),
         ingredient,
@@ -67,7 +69,7 @@ const Ingredients = () => {
   const removeIngredientHandler = useCallback(
     (id) => {
       sendRequest(
-        `https://react-hooks-6cbaf.firebaseio.com/ingredients/${id}.json`,
+        `${FIREBASE_URL}/ingredients/${id}.json`,
         "DELETE",
         null,
         id,

@@ -5,6 +5,7 @@ import ErrorModal from "../UI/ErrorModal";
 
 import Card from "../UI/Card";
 import "./Search.css";
+const FIREBASE_URL = `${process.env.REACT_APP_FIREBASE_URL}`;
 
 const Search = React.memo((props) => {
   const { onLoadIngredients } = props;
@@ -21,10 +22,7 @@ const Search = React.memo((props) => {
           enteredFilter.length === 0
             ? ""
             : `?orderBy="title"&equalTo="${enteredFilter}"`;
-        sendRequest(
-          `https://react-hooks-6cbaf.firebaseio.com/ingredients.json${query}`,
-          "GET"
-        );
+        sendRequest(`${FIREBASE_URL}/ingredients.json${query}`, "GET");
       }
     }, 500);
     return () => {
